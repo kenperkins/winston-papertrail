@@ -6,6 +6,8 @@
  *
  */
 
+// TODO still some work to get these working...
+
 var path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
