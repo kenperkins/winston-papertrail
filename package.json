@@ -1,0 +1,18 @@
+{
+  "name": "winston-papertrail",
+  "description": "A Papertrail transport for winston",
+  "version": "0.0.1",
+  "author": "Ken Perkins <kenjperkins@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kenperkins/winston-papertrail.git"
+  },
+  "keywords": ["logging", "sysadmin", "tools", "winston", "papertrail"],
+  "devDependencies": {
+    "winston": "0.4.x",
+    "vows": "0.5.x"
+  },
+  "main": "./lib/winston-papertrail",
+  "scripts": { "test": "vows test/*-test.js --spec" },
+  "engines": { "node": ">= 0.4.0" }
+}
