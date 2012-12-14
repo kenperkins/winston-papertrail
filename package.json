@@ -2,7 +2,7 @@
   "name": "winston-papertrail",
   "description": "A Papertrail transport for winston",
   "version": "0.0.3",
-  "author": "Ken Perkins <kenjperkins@gmail.com>",
+  "author": "Ken Perkins <ken@clipboard.com>",
   "repository": {
     "type": "git",
     "url": "http://github.com/kenperkins/winston-papertrail.git"
