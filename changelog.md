@@ -1,3 +1,9 @@
+# v0.0.3 #
+- Emits error when the buffer of messages reaches a maximum limit [Camilo Aguilar][2]
+- Add functionality to log uncaught exceptions [Lars Jacob][0]
+- Add option to inline meta data [Lars Jacob][0]
+- Don't send extra message if our message ends with a newline [Andy Burke][1]
+
 # v0.0.2 #
 - Added levelDecorators option to allow decorating the log level
 
@@ -6,3 +12,6 @@
 - implemented all basic functions
 - associations are working
 
+[0]: https://github.com/jaclar
+[1]: https://github.com/andyburke
+[2]: https://github.com/c4milo
