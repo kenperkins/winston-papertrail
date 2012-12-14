@@ -1,4 +1,4 @@
-# v0.0.3 #
+# v0.0.4 #
 - Emits error when the buffer of messages reaches a maximum limit [Camilo Aguilar][2]
 - Add functionality to log uncaught exceptions [Lars Jacob][0]
 - Add option to inline meta data [Lars Jacob][0]
