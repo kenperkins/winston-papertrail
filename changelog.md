@@ -1,3 +1,6 @@
+# v0.0.5 #
+- Handle when logging a null value, Fix for issue #5
+
 # v0.0.4 #
 - Emits error when the buffer of messages reaches a maximum limit [Camilo Aguilar][2]
 - Add functionality to log uncaught exceptions [Lars Jacob][0]
