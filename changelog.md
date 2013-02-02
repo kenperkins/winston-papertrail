@@ -1,5 +1,5 @@
-# v0.0.5 #
-- Handle when logging a null value, Fix for issue #5
+# v0.0.6 #
+- Handle when logging a null or non-string value, Fix for issue #5
 
 # v0.0.4 #
 - Emits error when the buffer of messages reaches a maximum limit [Camilo Aguilar][2]
