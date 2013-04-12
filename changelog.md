@@ -1,3 +1,10 @@
+# v0.1.0 #
+- Removed the levelDecorators option in favor of a format function
+- Added a `connected` event for Papertrail
+- Switched to jsdoc format
+- Updated to winston 0.6.x dependency
+- Added more examples to README
+
 # v0.0.6 #
 - Handle when logging a null or non-string value, Fix for issue #5
 
