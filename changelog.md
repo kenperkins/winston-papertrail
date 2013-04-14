@@ -1,3 +1,6 @@
+# v0.1.1 #
+- set rejectUnauthorized = false for TLS (workaround for issue #6)
+
 # v0.1.0 #
 - Removed the levelDecorators option in favor of a format function
 - Added a `connect` event for Papertrail
