@@ -1,3 +1,6 @@
+# v0.1.2 #
+- Updating deps to allow winston >=0.6.x (for issue #9)
+
 # v0.1.1 #
 - set rejectUnauthorized = false for TLS (workaround for issue #6)
 
