@@ -1,3 +1,7 @@
+# v0.1.3 #
+- Adding support for Colorization (Fix for issue #11)
+- Enabling winston.close to propogate to Papertrail transport (Fix for issue #14)
+
 # v0.1.2 #
 - Updating deps to allow winston >=0.6.x (for issue #9)
 

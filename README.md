@@ -117,6 +117,51 @@ var logger = new winston.Logger({
 
 logger.info('this is my message ' + new Date().getTime());
 
+```
+
+### Colorization
+
+The `winston-papertrail` transport supports colorization with `winston`. Currently, the ANSI codes used for escape sequences are part of the search index, so please be advised when using colorization.
+
+```Javascript
+var winston = require('winston'),
+    Papertrail = require('winston-papertrail').Papertrail;
+
+var logger = new winston.Logger({
+    transports: [
+        new Papertrail({
+            host: 'logs.papertrailapp.com',
+            port: 12345, // your port here
+            colorize: true
+        })
+    ]
+});
+
+logger.info('Hello from colorized winston', logger);
+
+```
+
+### Closing the transport
+
+As of `v0.1.3` `winston-papertrail` transport supports closing the transport (and the underlying TLS connection) via the `Winston.Transport` `close` method. Thus, you can enable scenarios where your transport automatically closes when you close the `winston` logger.
+
+```Javascript
+var winston = require('winston'),
+    Papertrail = require('winston-papertrail').Papertrail;
+
+pt = new Papertrail({
+    host: 'logs.papertrailapp.com',
+    port: 12345 // your port here
+});
+
+var logger = new winston.Logger({
+    transports: [ pt ]
+});
+
+pt.on('connect', function () {
+    logger.info('logging before I close');
+    logger.close(); // this closes the underlying TLS connection in the Papertrailt transport
+});
 
 
 ```
