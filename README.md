@@ -116,7 +116,6 @@ var logger = new winston.Logger({
 });
 
 logger.info('this is my message ' + new Date().getTime());
-
 ```
 
 ### Colorization
@@ -138,7 +137,6 @@ var logger = new winston.Logger({
 });
 
 logger.info('Hello from colorized winston', logger);
-
 ```
 
 ### Closing the transport
@@ -162,8 +160,6 @@ pt.on('connect', function () {
     logger.info('logging before I close');
     logger.close(); // this closes the underlying TLS connection in the Papertrailt transport
 });
-
-
 ```
 
 Currently, the Papertrail transport only supports TLS logging.
