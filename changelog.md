@@ -1,3 +1,6 @@
+# v0.1.4 #
+- Handling case when meta is an empty object [voodootikigod][3]
+
 # v0.1.3 #
 - Adding support for Colorization (Fix for issue #11)
 - Enabling winston.close to propogate to Papertrail transport (Fix for issue #14)
@@ -35,3 +38,4 @@
 [0]: https://github.com/jaclar
 [1]: https://github.com/andyburke
 [2]: https://github.com/c4milo
+[3]: https://github.com/voodootikigod
