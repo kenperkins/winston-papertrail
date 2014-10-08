@@ -20,7 +20,7 @@ function assertPapertrail (transport) {
   assert.isFunction(transport.log);
 };
 
-var transport = new Papertrail();
+var transport = new Papertrail({host: 'localhost', port: 12345});
 
 vows.describe('winston-papertrail').addBatch({
  "An instance of the Papertrail Transport": {
