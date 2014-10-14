@@ -1,21 +1,31 @@
 {
-	"name": "winston-papertrail",
-	"description": "A Papertrail transport for winston",
-	"version": "0.1.4",
-	"author": "Ken Perkins <ken.perkins@rackspace.com>",
-	"repository": {
-		"type": "git",
-		"url": "http://github.com/kenperkins/winston-papertrail.git"
-	},
-	"keywords": ["logging", "sysadmin", "tools", "winston", "papertrail"],
-	"devDependencies": {
-		"winston": ">=0.6.x",
-		"vows": "0.5.x"
-	},
-	"peerDependencies": {
-		"winston": ">=0.6.x"
-	},
-	"main": "./lib/winston-papertrail",
-	"scripts": { "test": "vows test/*-test.js --spec" },
-	"engines": { "node": ">= 0.4.0" }
+  "name": "winston-papertrail",
+  "description": "A Papertrail transport for winston",
+  "version": "0.1.5",
+  "author": "Ken Perkins <ken.perkins@rackspace.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kenperkins/winston-papertrail.git"
+  },
+  "keywords": [
+    "logging",
+    "sysadmin",
+    "tools",
+    "winston",
+    "papertrail"
+  ],
+  "devDependencies": {
+    "winston": ">=0.6.x",
+    "vows": "0.5.x"
+  },
+  "peerDependencies": {
+    "winston": ">=0.6.x"
+  },
+  "main": "./lib/winston-papertrail",
+  "scripts": {
+    "test": "vows test/*-test.js --spec"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  }
 }
