@@ -15,15 +15,16 @@
     "papertrail"
   ],
   "devDependencies": {
-    "winston": ">=0.6.x",
-    "vows": "0.5.x"
+    "mocha": "^2.0.1",
+    "should": "^4.3.0",
+    "winston": ">=0.6.x"
   },
   "peerDependencies": {
     "winston": ">=0.6.x"
   },
   "main": "./lib/winston-papertrail",
   "scripts": {
-    "test": "vows test/*-test.js --spec"
+    "test": "mocha test/*-test.js --spec"
   },
   "engines": {
     "node": ">= 0.4.0"
