@@ -1,3 +1,9 @@
+# v0.2.0 #
+- Added support for non-TLS connections
+- Cleaned up Socket Error handling due to keep-alive changes #23 [eric][4]
+- Moved tests to Mocha (Finally!)
+- Cleaned up README for all options
+
 # v0.1.4 #
 - Handling case when meta is an empty object [voodootikigod][3]
 
@@ -39,3 +45,5 @@
 [1]: https://github.com/andyburke
 [2]: https://github.com/c4milo
 [3]: https://github.com/voodootikigod
+[4]: https://github.com/eric
+
