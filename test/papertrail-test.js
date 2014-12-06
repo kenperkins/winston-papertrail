@@ -1,7 +1,7 @@
 /*
  * papertrail-test.js: Tests for instances of the Papertrail transport
  *
- * (C) 2012 Ken Perkins
+ * (C) 2014 Ken Perkins
  * MIT LICENSE
  *
  */
@@ -9,27 +9,103 @@
 // TODO still some work to get these working...
 
 var path = require('path'),
-    vows = require('vows'),
-    assert = require('assert'),
-    winston = require('winston'),
-    helpers = require('winston/test/helpers'),
-    Papertrail = require('../lib/winston-papertrail').Papertrail;
+  should = require('should'),
+  fs = require('fs'),
+  winston = require('winston'),
+  net = require('net'),
+  tls = require('tls'),
+  Papertrail = require('../lib/winston-papertrail').Papertrail;
 
-function assertPapertrail (transport) {
-  assert.instanceOf(transport, Papertrail);
-  assert.isFunction(transport.log);
-};
+describe('connection tests', function() {
 
-var transport = new Papertrail({host: 'localhost', port: 12345});
+  describe('invalid connections', function() {
+    it('should fail to connect', function (done) {
+      var pt = new Papertrail({
+        host: 'this.wont.resolve',
+        port: 12345 // your port here
+      });
 
-vows.describe('winston-papertrail').addBatch({
- "An instance of the Papertrail Transport": {
-   "should have the proper methods defined": function () {
-       assertPapertrail(transport);
-   },
-   "the log() method": helpers.testNpmLevels(transport, "should log messages to papertrail", function (ign, err, meta, result) {
-     assert.isTrue(!err);
-     assert.isObject(result);
-   })
- }
-}).export(module);
+      pt.on('error', function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+
+    it('should timeout', function (done) {
+      var pt = new Papertrail({
+        host: '8.8.8.8',
+        port: 12345 // your port here
+      });
+
+      pt.on('error', function (err) {
+        should.exist(err);
+        done();
+      });
+    });
+  });
+
+  describe('valid connection', function() {
+
+    var server, listener = function() {};
+
+    before(function(done) {
+      server = tls.createServer({
+        key: fs.readFileSync('./test/server.key'),
+        cert: fs.readFileSync('./test/server.crt'),
+        rejectUnauthorized: false
+      }, function (socket) {
+        socket.on('data', listener);
+      });
+
+      server.listen(23456, function() {
+        done();
+      });
+    });
+
+    it('should connect', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        done();
+      });
+    });
+
+    it('should send message', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        pt.log('info', 'hello', function() {
+
+        });
+      });
+
+      listener = function(data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
+    after(function(done) {
+      server.close();
+      done();
+    });
+  });
+
+});
+
+
