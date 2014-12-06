@@ -22,7 +22,9 @@ describe('connection tests', function() {
     it('should fail to connect', function (done) {
       var pt = new Papertrail({
         host: 'this.wont.resolve',
-        port: 12345 // your port here
+        port: 12345,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
       });
 
       pt.on('error', function (err) {
@@ -34,7 +36,9 @@ describe('connection tests', function() {
     it.skip('should timeout', function (done) {
       var pt = new Papertrail({
         host: '8.8.8.8', // TODO Figure out how to enable a timeout test
-        port: 12345
+        port: 12345,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
       });
 
       pt.on('error', function (err) {
@@ -44,7 +48,7 @@ describe('connection tests', function() {
     });
   });
 
-  describe('valid connection', function() {
+  describe('valid connection over tls', function() {
 
     var server, listener = function() {};
 
@@ -65,7 +69,9 @@ describe('connection tests', function() {
     it('should connect', function (done) {
       var pt = new Papertrail({
         host: 'localhost',
-        port: 23456
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
       });
 
       pt.on('error', function (err) {
@@ -80,7 +86,9 @@ describe('connection tests', function() {
     it('should send message', function (done) {
       var pt = new Papertrail({
         host: 'localhost',
-        port: 23456
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
       });
 
       pt.on('error', function (err) {
@@ -100,7 +108,105 @@ describe('connection tests', function() {
       }
     });
 
+    // TODO need to fix the TLS Server to reject new sockets that are not over tls
+    it.skip('should fail to connect without tls', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        disableTls: true,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.exist.exist(err);
+        done();
+      });
+    });
+
     after(function(done) {
+      server.close();
+      done();
+    });
+  });
+
+
+  describe('valid connection over tcp', function () {
+
+    var server, listener = function () {
+    };
+
+    before(function (done) {
+      server = net.createServer(function (socket) {
+        socket.on('data', listener);
+      });
+
+      server.listen(23456, function () {
+        done();
+      });
+    });
+
+    it('should connect', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        disableTls: true,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        done();
+      });
+    });
+
+    it('should send message', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        disableTls: true,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        pt.log('info', 'hello', function () {
+
+        });
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
+    // TODO figure out how to get this to fail
+    it.skip('should fail to connect via tls', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        throw err;
+        should.exist.exist(err);
+        done();
+      });
+    });
+
+    after(function (done) {
       server.close();
       done();
     });
