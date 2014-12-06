@@ -20,7 +20,8 @@ A Papertrail transport for [winston][0].
 There are a few required options for logging to Papertrail:
 
 * __host:__ FQDN or IP Address of the Papertrail Service Endpoint
-* __port:__ The TLS Endpoint TCP Port
+* __port:__ The Endpoint TCP Port
+
 
 ## Usage
 ``` js
@@ -37,12 +38,33 @@ There are a few required options for logging to Papertrail:
   		new winston.transports.Papertrail({
   			host: 'logs.papertrailapp.com',
   			port: 12345
-  		})
+  		});
   	]
   });
 
   logger.info('this is my message');
 ```
+
+There are a number of optional settings:
+
+- `disableTls` - set to `true` to disable TLS on your transport. Defaults to `false`
+- `level` - The log level to use for this transport, defaults to `info`
+- `hostname` - The hostname for your transport, defaults to `os.hostname()`
+- `program` - The program for your transport, defaults to `default`
+- `logFormat` - A function to format your log message before sending, see below
+- `colorize` - Enable colors in Papertrail, defaults to `false`
+- `inlineMeta` - Inline multi-line messages, defaults to `false`
+- `handleExceptions` - Tell this Transport to handle exceptions, defaults to `false`
+
+There are also a number of settings for connection failure and retry behavior
+
+- `attemptsBeforeDecay` - How many retries should be attempted before backing off, defaults to `5`
+- `maximumAttempts` - How many retries before disabling buffering, defaults to `25`
+- `connectionDelay` - How long between backoff in milliseconds, defaults to `1000`
+- `maxDelayBetweenReconnection` - The maximum backoff in milliseconds, defaults to `60000`
+- `maxBufferSize` - The maximum size of the retry buffer, in bytes, defaults to `1048576`
+
+## Advanced Usage
 
 For more some advanced logging, you can take advantage of custom formatting for
 Papertrail:
@@ -70,6 +92,8 @@ Papertrail:
 
   logger.info('this is my message');
 ```
+
+## Transport Events
 
 The Papertrail transport is also capable of emitting events for `error` and `connect` so you can log to other transports:
 
@@ -159,12 +183,9 @@ var logger = new winston.Logger({
 
 pt.on('connect', function () {
     logger.info('logging before I close');
-    logger.close(); // this closes the underlying TLS connection in the Papertrailt transport
+    logger.close(); // this closes the underlying connection in the Papertrail transport
 });
 ```
-
-Currently, the Papertrail transport only supports TLS logging.
-
 
 #### Author: [Ken Perkins](http://blog.clipboard.com)
 
