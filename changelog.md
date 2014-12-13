@@ -1,3 +1,6 @@
+# v0.2.2 #
+- Fixed a case where non-object meta would throw #27
+
 # v0.2.1 #
 - Fixed a case where calling `close` before `connect` would fail to end the stream #22
 
