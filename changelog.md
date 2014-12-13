@@ -1,4 +1,4 @@
-# v0.2.2 #
+# v0.2.3 #
 - Fixed a case where non-object meta would throw #27
 
 # v0.2.1 #
