@@ -108,6 +108,114 @@ describe('connection tests', function() {
       }
     });
 
+    it('should support object meta', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        (function () {
+          pt.log('info', 'hello', { meta: 'object' }, function () {
+
+          });
+        }).should.not.throw();
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
+    it('should support array meta', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        (function () {
+          pt.log('info', 'hello', ['object'], function () {
+
+          });
+        }).should.not.throw();
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
+    it('should support null meta', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        (function () {
+          pt.log('info', 'hello', null, function () {
+
+          });
+        }).should.not.throw();
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
+    it('should support non-object meta', function(done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        (function() {
+          pt.log('info', 'hello', 'meta object', function () {
+
+          });
+        }).should.not.throw();
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('default info hello meta object\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
     // TODO need to fix the TLS Server to reject new sockets that are not over tls
     it.skip('should fail to connect without tls', function (done) {
       var pt = new Papertrail({
