@@ -1,3 +1,6 @@
+# v0.2.1 #
+- Fixed a case where calling `close` before `connect` would fail to end the stream #22
+
 # v0.2.0 #
 - Added support for non-TLS connections
 - Cleaned up Socket Error handling due to keep-alive changes #23 [eric][4]
