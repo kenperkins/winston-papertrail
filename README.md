@@ -51,6 +51,7 @@ There are a number of optional settings:
 - `level` - The log level to use for this transport, defaults to `info`
 - `hostname` - The hostname for your transport, defaults to `os.hostname()`
 - `program` - The program for your transport, defaults to `default`
+- `facility` - The syslog facility for this transport, defaults to `daemon`
 - `logFormat` - A function to format your log message before sending, see below
 - `colorize` - Enable colors in Papertrail, defaults to `false`
 - `inlineMeta` - Inline multi-line messages, defaults to `false`

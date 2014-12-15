@@ -22,6 +22,9 @@
   "peerDependencies": {
     "winston": ">=0.6.x"
   },
+  "dependencies": {
+    "glossy": "^0.1.7"
+  },
   "main": "./lib/winston-papertrail",
   "scripts": {
     "test": "mocha test/*-test.js --spec"
