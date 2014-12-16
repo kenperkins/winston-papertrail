@@ -131,6 +131,7 @@ describe('connection tests', function() {
       listener = function (data) {
         should.exist(data);
         data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        data.toString().indexOf('object').should.not.equal(-1);
         done();
       }
     });
@@ -158,6 +159,7 @@ describe('connection tests', function() {
       listener = function (data) {
         should.exist(data);
         data.toString().indexOf('default info hello\r\n').should.not.equal(-1);
+        data.toString().indexOf('object').should.not.equal(-1);
         done();
       }
     });
