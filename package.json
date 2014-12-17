@@ -1,7 +1,7 @@
 {
   "name": "winston-papertrail",
   "description": "A Papertrail transport for winston",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "author": "Ken Perkins <ken.perkins@rackspace.com>",
   "repository": {
     "type": "git",
