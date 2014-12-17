@@ -1,3 +1,7 @@
+# v1.0.0 #
+- Switched to [RFC 5425](https://tools.ietf.org/html/rfc5424) for messages to Papertrail #29 [jahqueel][5]
+- Fixed a bug with meta not showing up correctly #28 [brycekahle][6]
+
 # v0.2.3 #
 - Fixed a case where non-object meta would throw #27
 
@@ -52,4 +56,6 @@
 [2]: https://github.com/c4milo
 [3]: https://github.com/voodootikigod
 [4]: https://github.com/eric
+[5]: https://github.com/jahqueel
+[6]: https://github.com/brycekahle
 
