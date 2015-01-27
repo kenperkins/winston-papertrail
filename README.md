@@ -38,7 +38,7 @@ There are a few required options for logging to Papertrail:
   		new winston.transports.Papertrail({
   			host: 'logs.papertrailapp.com',
   			port: 12345
-  		});
+  		})
   	]
   });
 
