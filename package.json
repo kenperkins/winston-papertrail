@@ -19,9 +19,6 @@
     "should": "^4.3.0",
     "winston": ">=0.6.x"
   },
-  "peerDependencies": {
-    "winston": ">=0.6.x"
-  },
   "dependencies": {
     "glossy": "^0.1.7"
   },
