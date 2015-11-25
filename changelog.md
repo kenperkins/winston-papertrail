@@ -1,3 +1,6 @@
+#v1.0.2
+- Fixed a bug when logging error objects [dmiddlecamp][7]
+
 # v1.0.1 #
 - Cleaned up formatting for inline meta objects #30 [byrcekahle][6]
 
@@ -61,4 +64,4 @@
 [4]: https://github.com/eric
 [5]: https://github.com/jahqueel
 [6]: https://github.com/brycekahle
-
+[7]: https://github.com/dmiddlecamp
