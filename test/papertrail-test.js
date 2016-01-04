@@ -218,6 +218,39 @@ describe('connection tests', function() {
       }
     });
 
+    it('should pass meta to logFormat', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000,
+        logFormat: function(level, message, meta) {
+          return 'META: ' + meta.answer;
+        }
+      });
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+        var meta = {
+          answer: 42
+        };
+        (function() {
+          pt.log('info', 'message', meta, function () {
+
+          });
+        }).should.not.throw();
+      });
+
+      listener = function (data) {
+        should.exist(data);
+        data.toString().indexOf('META: 42\r\n').should.not.equal(-1);
+        done();
+      }
+    });
+
     // TODO need to fix the TLS Server to reject new sockets that are not over tls
     it.skip('should fail to connect without tls', function (done) {
       var pt = new Papertrail({
