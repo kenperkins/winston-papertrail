@@ -83,6 +83,35 @@ describe('connection tests', function() {
       });
     });
 
+    it('should connect a bunch without exploding', function (done) {
+      var pt = new Papertrail({
+        host: 'localhost',
+        port: 23456,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 100
+      });
+
+      pt._reconnectStream();
+      pt._reconnectStream();
+      pt._reconnectStream();
+
+      var someInterval = setInterval(pt._reconnectStream.bind(pt), 10);
+      var connCount = 0;
+
+      pt.on('error', function (err) {
+        should.not.exist(err);
+      });
+
+      pt.on('connect', function () {
+          connCount++;
+          if (connCount > 5) {
+              clearInterval(someInterval);
+              done();
+          }
+
+      });
+    });
+
     it('should send message', function (done) {
       var pt = new Papertrail({
         host: 'localhost',
