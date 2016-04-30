@@ -52,6 +52,8 @@ There are a number of optional settings:
 - `hostname` - The hostname for your transport, defaults to `os.hostname()`
 - `program` - The program for your transport, defaults to `default`
 - `facility` - The syslog facility for this transport, defaults to `daemon`
+- `useNpmStyleLogLevels` - Use NPM-style log levels, and map them to syslog levels via `npmLevelMap`, defaults to `false`
+- `npmLevelMap` - An object, with attributes mapping NPM log levels to numerical syslog RFCs severity levels, defaults to `silly` & `debug` as `7`, `verbose` & `info` as `6`, `warn` as `4`, and `error` as 3
 - `logFormat` - A function to format your log message before sending, see below
 - `colorize` - Enable colors in Papertrail, defaults to `false`
 - `inlineMeta` - Inline multi-line messages, defaults to `false`
