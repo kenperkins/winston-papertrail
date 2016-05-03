@@ -53,6 +53,7 @@ There are a number of optional settings:
 - `program` - The program for your transport, defaults to `default`
 - `facility` - The syslog facility for this transport, defaults to `daemon`
 - `logFormat` - A function to format your log message before sending, see below
+- `messageFormat` - A function to format entire message before sending, see below
 - `colorize` - Enable colors in Papertrail, defaults to `false`
 - `inlineMeta` - Inline multi-line messages, defaults to `false`
 - `handleExceptions` - Tell this Transport to handle exceptions, defaults to `false`
@@ -70,6 +71,8 @@ There are also a number of settings for connection failure and retry behavior
 For more some advanced logging, you can take advantage of custom formatting for
 Papertrail:
 
+### logFormat
+
 ``` js
   var winston = require('winston');
 
@@ -86,6 +89,34 @@ Papertrail:
   			port: 12345,
   			logFormat: function(level, message) {
   			    return '<<<' + level + '>>> ' + message;
+  			}
+  		})
+  	]
+  });
+
+  logger.info('this is my message');
+```
+
+Note that internally, `winston-papertrial` splits a multiple line message into multiple log entries (one per line). `logFormat` will be applied after the split. If you want to not split the message by line or have access to the meta data, see `messageFormat` below.
+
+### messageFormat
+
+``` js
+  var winston = require('winston');
+
+  //
+  // Requiring `winston-papertrail` will expose
+  // `winston.transports.Papertrail`
+  //
+  require('winston-papertrail').Papertrail;
+
+  var logger = new winston.Logger({
+  	transports: [
+  		new winston.transports.Papertrail({
+  			host: 'logs.papertrailapp.com',
+  			port: 12345,
+  			messageFormat: function(level, message, meta) {
+          return 'message: ' + message + ', meta: ' + meta;
   			}
   		})
   	]
