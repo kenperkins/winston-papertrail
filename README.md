@@ -49,6 +49,7 @@ There are a number of optional settings:
 
 - `disableTls` - set to `true` to disable TLS on your transport. Defaults to `false`
 - `level` - The log level to use for this transport, defaults to `info`
+- `levels` - A custom mapping of log levels strings to severity levels, defaults to the mapping of `npm` levels to RFC5424 severities
 - `hostname` - The hostname for your transport, defaults to `os.hostname()`
 - `program` - The program for your transport, defaults to `default`
 - `facility` - The syslog facility for this transport, defaults to `daemon`
