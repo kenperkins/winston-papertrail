@@ -33,13 +33,17 @@ There are a few required options for logging to Papertrail:
   //
   require('winston-papertrail').Papertrail;
 
+  var winstonPapertrail = new winston.transports.Papertrail({
+	host: 'logs.papertrailapp.com',
+	port: 12345
+  })
+  
+  winstonPapertrail.on('error', function(err) {
+	// Handle, report, or silently ignore connection errors and failures
+  });
+
   var logger = new winston.Logger({
-  	transports: [
-  		new winston.transports.Papertrail({
-  			host: 'logs.papertrailapp.com',
-  			port: 12345
-  		})
-  	]
+	transports: [winstonPapertrail]
   });
 
   logger.info('this is my message');
