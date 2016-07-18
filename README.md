@@ -38,7 +38,7 @@ There are a few required options for logging to Papertrail:
 	port: 12345
   })
   
-  winstonPt.on('error', function(err) {
+  winstonPapertrail.on('error', function(err) {
 	// Handle, report, or silently ignore connection errors and failures
   });
 
