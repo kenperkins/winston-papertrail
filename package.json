@@ -12,7 +12,8 @@
     "sysadmin",
     "tools",
     "winston",
-    "papertrail"
+    "papertrail",
+    "logs"
   ],
   "devDependencies": {
     "mocha": "^2.0.1",
