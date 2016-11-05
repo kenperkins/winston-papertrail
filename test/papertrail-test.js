@@ -137,6 +137,38 @@ describe('connection tests', function() {
       }
     });
 
+	  it('should write buffered events before new events', function(done) {
+		  var pt = new Papertrail({
+			  host: 'localhost',
+			  port: 23456,
+			  attemptsBeforeDecay: 0,
+			  connectionDelay: 10000
+		  });
+
+		  pt.log('info', 'first', {}, function() {
+
+		  });
+
+		  pt.on('error', function(err) {
+			  should.not.exist(err);
+		  });
+
+		  pt.on('connect', function() {
+			  (function() {
+				  pt.log('info', 'second', {}, function() {
+
+				  });
+			  }).should.not.throw();
+		  });
+
+		  listener = function(data) {
+			  should.exist(data);
+			  var lines = data.toString().split('\r\n');
+			  lines[0].should.match(/first/);
+			  done();
+		  }
+	  });
+
     it('should support object meta', function (done) {
       var pt = new Papertrail({
         host: 'localhost',
