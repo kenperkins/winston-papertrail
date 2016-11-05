@@ -161,10 +161,15 @@ describe('connection tests', function() {
 			  }).should.not.throw();
 		  });
 
+		  var gotFirst = false;
 		  listener = function(data) {
+			  if (gotFirst) {
+				  return;
+			  }
 			  should.exist(data);
 			  var lines = data.toString().split('\r\n');
 			  lines[0].should.match(/first/);
+			  gotFirst = true;
 			  done();
 		  }
 	  });
