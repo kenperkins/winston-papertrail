@@ -295,6 +295,37 @@ describe('connection tests', function() {
       });
     });
 
+      // creates a logger with flushOnClose and something buffered
+	  // connects, then closes, ensure what we wanted was written.
+	  it('flushOnClose should write buffered events before closing the stream', function(done) {
+		  var pt = new Papertrail({
+			  host: 'localhost',
+			  port: 23456,
+			  attemptsBeforeDecay: 0,
+			  connectionDelay: 10000,
+			  flushOnClose: true
+		  });
+
+		  pt.log('info', 'buffered', {}, function() {
+
+		  });
+
+		  pt.on('error', function(err) {
+			  should.not.exist(err);
+		  });
+
+		  pt.on('connect', function() {
+			  pt.close();
+		  });
+
+		  listener = function(data) {
+			  should.exist(data);
+			  var lines = data.toString().split('\r\n');
+			  lines[0].should.match(/buffered/);
+			  done();
+		  }
+	  });
+
     after(function(done) {
       server.close();
       done();
