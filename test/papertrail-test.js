@@ -33,6 +33,22 @@ describe('connection tests', function() {
       });
     });
 
+    it('should not exit process when it fails to connect', function (done) {
+      var pt = new Papertrail({
+        host: 'this.wont.resolve',
+        port: 12345,
+        attemptsBeforeDecay: 0,
+        connectionDelay: 10000
+      });
+
+		// NOTE!  We intentionally left off the error handler here, this proves
+		// the process won't exit on a connection error.
+
+		setTimeout(function() {
+			done();
+		}, 125);
+    });
+
     it.skip('should timeout', function (done) {
       var pt = new Papertrail({
         host: '8.8.8.8', // TODO Figure out how to enable a timeout test
