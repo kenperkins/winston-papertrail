@@ -137,6 +137,43 @@ describe('connection tests', function() {
       }
     });
 
+	  it('should write buffered events before new events', function(done) {
+		  var pt = new Papertrail({
+			  host: 'localhost',
+			  port: 23456,
+			  attemptsBeforeDecay: 0,
+			  connectionDelay: 10000
+		  });
+
+		  pt.log('info', 'first', {}, function() {
+
+		  });
+
+		  pt.on('error', function(err) {
+			  should.not.exist(err);
+		  });
+
+		  pt.on('connect', function() {
+			  (function() {
+				  pt.log('info', 'second', {}, function() {
+
+				  });
+			  }).should.not.throw();
+		  });
+
+		  var gotFirst = false;
+		  listener = function(data) {
+			  if (gotFirst) {
+				  return;
+			  }
+			  should.exist(data);
+			  var lines = data.toString().split('\r\n');
+			  lines[0].should.match(/first/);
+			  gotFirst = true;
+			  done();
+		  }
+	  });
+
     it('should support object meta', function (done) {
       var pt = new Papertrail({
         host: 'localhost',
@@ -262,6 +299,37 @@ describe('connection tests', function() {
         done();
       });
     });
+
+      // creates a logger with flushOnClose and something buffered
+	  // connects, then closes, ensure what we wanted was written.
+	  it('flushOnClose should write buffered events before closing the stream', function(done) {
+		  var pt = new Papertrail({
+			  host: 'localhost',
+			  port: 23456,
+			  attemptsBeforeDecay: 0,
+			  connectionDelay: 10000,
+			  flushOnClose: true
+		  });
+
+		  pt.log('info', 'buffered', {}, function() {
+
+		  });
+
+		  pt.on('error', function(err) {
+			  should.not.exist(err);
+		  });
+
+		  pt.on('connect', function() {
+			  pt.close();
+		  });
+
+		  listener = function(data) {
+			  should.exist(data);
+			  var lines = data.toString().split('\r\n');
+			  lines[0].should.match(/buffered/);
+			  done();
+		  }
+	  });
 
     after(function(done) {
       server.close();
