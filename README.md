@@ -58,9 +58,10 @@ There are a number of optional settings:
 - `program` - The program for your transport, defaults to `default`
 - `facility` - The syslog facility for this transport, defaults to `daemon`
 - `logFormat` - A function to format your log message before sending, see below
-- `colorize` - Enable colors in Papertrail, defaults to `false`
+- `colorize` - Enable colors in logs, defaults to `false`
 - `inlineMeta` - Inline multi-line messages, defaults to `false`
 - `handleExceptions` - Tell this Transport to handle exceptions, defaults to `false`
+- `flushOnClose` - Flush any queued logs prior to closing/exiting
 
 There are also a number of settings for connection failure and retry behavior
 
@@ -193,6 +194,6 @@ pt.on('connect', function () {
 });
 ```
 
-#### Author: [Ken Perkins](http://blog.clipboard.com)
+#### Author: [Ken Perkins](https://twitter.com/kenperkins)
 
 [0]: https://github.com/flatiron/winston
