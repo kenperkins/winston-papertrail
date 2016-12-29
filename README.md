@@ -62,6 +62,7 @@ There are a number of optional settings:
 - `inlineMeta` - Inline multi-line messages, defaults to `false`
 - `handleExceptions` - Tell this Transport to handle exceptions, defaults to `false`
 - `flushOnClose` - Flush any queued logs prior to closing/exiting
+- `depth` - max depth for objects dumped by NodeJS `util.inspect`
 
 There are also a number of settings for connection failure and retry behavior
 
