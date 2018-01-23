@@ -141,7 +141,7 @@ describe('connection tests', function() {
       });
 
       pt.on('connect', function () {
-        pt.log('info', 'hello', function() {
+        pt.log({level:'info', message:'hello'}, function() {
 
         });
       });
@@ -161,7 +161,7 @@ describe('connection tests', function() {
 			  connectionDelay: 10000
 		  });
 
-		  pt.log('info', 'first', {}, function() {
+		  pt.log({level:'info', message:'first', meta:{}}, function() {
 
 		  });
 
@@ -171,7 +171,7 @@ describe('connection tests', function() {
 
 		  pt.on('connect', function() {
 			  (function() {
-				  pt.log('info', 'second', {}, function() {
+				  pt.log({level:'info', message:'second', meta:{}}, function() {
 
 				  });
 			  }).should.not.throw();
@@ -204,7 +204,7 @@ describe('connection tests', function() {
 
       pt.on('connect', function () {
         (function () {
-          pt.log('info', 'hello', { meta: 'object' }, function () {
+          pt.log({level: 'info', message:'hello', meta:{ meta: 'object' }}, function () {
 
           });
         }).should.not.throw();
@@ -232,7 +232,7 @@ describe('connection tests', function() {
 
       pt.on('connect', function () {
         (function () {
-          pt.log('info', 'hello', ['object'], function () {
+          pt.log({level:'info', message:'hello', meta:['object']}, function () {
 
           });
         }).should.not.throw();
@@ -260,7 +260,7 @@ describe('connection tests', function() {
 
       pt.on('connect', function () {
         (function () {
-          pt.log('info', 'hello', null, function () {
+          pt.log({level:'info', message:'hello', meta:null}, function () {
 
           });
         }).should.not.throw();
@@ -287,7 +287,7 @@ describe('connection tests', function() {
 
       pt.on('connect', function () {
         (function() {
-          pt.log('info', 'hello', 'meta object', function () {
+          pt.log({level:'info', message:'hello', meta:'meta object'}, function () {
 
           });
         }).should.not.throw();
@@ -327,7 +327,7 @@ describe('connection tests', function() {
 			  flushOnClose: true
 		  });
 
-		  pt.log('info', 'buffered', {}, function() {
+		  pt.log({level:'info', message:'buffered', meta:{}}, function() {
 
 		  });
 
@@ -401,7 +401,7 @@ describe('connection tests', function() {
       });
 
       pt.on('connect', function () {
-        pt.log('info', 'hello', function () {
+        pt.log({level:'info', message:'hello'}, function () {
 
         });
       });
