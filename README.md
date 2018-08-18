@@ -37,12 +37,12 @@ There are a few required options for logging to Papertrail:
 	host: 'logs.papertrailapp.com',
 	port: 12345
   })
-  
+
   winstonPapertrail.on('error', function(err) {
 	// Handle, report, or silently ignore connection errors and failures
   });
 
-  var logger = new winston.Logger({
+  var logger = winston.createLogger({
 	transports: [winstonPapertrail]
   });
 
@@ -86,7 +86,7 @@ Papertrail:
   //
   require('winston-papertrail').Papertrail;
 
-  var logger = new winston.Logger({
+  var logger = winston.createLogger({
   	transports: [
   		new winston.transports.Papertrail({
   			host: 'logs.papertrailapp.com',
@@ -135,7 +135,7 @@ ptTransport.on('connect', function(message) {
 	logger && logger.info(message);
 });
 
-var logger = new winston.Logger({
+var logger = winston.createLogger({
 	levels: {
 		debug: 0,
 		info: 1,
@@ -159,7 +159,7 @@ The `winston-papertrail` transport supports colorization with `winston`. Current
 var winston = require('winston'),
     Papertrail = require('winston-papertrail').Papertrail;
 
-var logger = new winston.Logger({
+var logger = winston.createLogger({
     transports: [
         new Papertrail({
             host: 'logs.papertrailapp.com',
@@ -185,7 +185,7 @@ pt = new Papertrail({
     port: 12345 // your port here
 });
 
-var logger = new winston.Logger({
+var logger = winston.createLogger({
     transports: [ pt ]
 });
 
