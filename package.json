@@ -16,6 +16,7 @@
     "logs"
   ],
   "devDependencies": {
+    "eslint": "^5.11.1",
     "mocha": "^2.0.1",
     "should": "^4.3.0",
     "winston": ">=0.6.x"
@@ -28,6 +29,7 @@
   },
   "main": "./lib/winston-papertrail",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha test/*-test.js --spec"
   },
   "engines": {
