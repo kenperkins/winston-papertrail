@@ -8,6 +8,7 @@ module.exports = {
   },
   rules: {
     camelcase: ['error', { properties: 'never' }],
+    indent: ['error', 2],
     'comma-dangle': ['error', 'always-multiline'],
     'default-case': 'error',
     eqeqeq: 'warn',
@@ -28,7 +29,7 @@ module.exports = {
     'no-var': 'error',
     'prefer-const': 'warn',
     semi: ['error', 'always'],
-    'space-before-function-paren': 'off',
+    'space-before-function-paren': ['error', 'always'],
     'standard/computed-property-even-spacing': 'off',
     yoda: 'error',
   },
