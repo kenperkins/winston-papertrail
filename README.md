@@ -60,6 +60,7 @@ There are a number of optional settings:
 - `logFormat` - A function to format your log message before sending, see below
 - `colorize` - Enable colors in logs, defaults to `false`
 - `inlineMeta` - Inline multi-line messages, defaults to `false`
+- `excludeMeta` - Don't add meta after the message, defaults to `false`
 - `handleExceptions` - Tell this Transport to handle exceptions, defaults to `false`
 - `flushOnClose` - Flush any queued logs prior to closing/exiting
 - `depth` - max depth for objects dumped by NodeJS `util.inspect`
